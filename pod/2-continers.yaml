@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: 2-cont
+spec:
+  containers:
+  - image: python:3.6-alpine
+    name: python-c1
+    command: ['sh', '-c', 'echo cont1 > index.html && python -m http.server 8081']
+  - image: python:3.6-alpine
+    name: python-c2
+    command: ['sh', '-c', 'echo cont12> index.html && python -m http.server 8082']
