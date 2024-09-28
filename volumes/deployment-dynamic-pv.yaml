@@ -1,0 +1,39 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kubernetes.io/change-cause: "image initial test"
+  name: mysql-test
+  labels:
+    app: front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: front
+  template:
+    metadata:
+      labels:
+        app: front
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:5.7
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: "12345678"
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "500m"
+          limits:
+            memory: "200Mi"
+            cpu: "0.5"
+        volumeMounts:
+          - mountPath: "/var/lib/mysql"
+            name: vol-mysql
+      volumes:
+        - name: vol-mysql
+          persistentVolumeClaim:
+            claimName: test-pvc
