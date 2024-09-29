@@ -18,8 +18,8 @@ kubectl config view  | grep server
 docker run --rm -ti -v $PWD:/test -w /test  -v /etc/kubernetes/pki/ca.crt:/ca.crt  -v /usr/bin/kubectl:/usr/bin/kubectl alpine sh
 
 ## Configure kubectl for user
-kubectl config set-cluster master-node --server=https://192.168.1.92:6443 --certificate-authority=/ca.crt
+kubectl config set-cluster kubernetes --server=https://192.168.1.92:6443 --certificate-authority=/ca.crt
 kubectl config set-credentials ivancastro --client-certificate=ivancastro.crt --client-key=ivancastro.key
-kubectl config set-context ivancastro --cluster=master-node --user=ivancastro
+kubectl config set-context ivancastro --cluster=kubernetes --user=ivancastro
 kubectl config view
 kubectl config use-context ivancastro
